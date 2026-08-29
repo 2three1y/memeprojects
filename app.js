@@ -1,62 +1,18 @@
 (() => {
   "use strict";
-
-  const fallbackRoasts = {
-    standard: ["Your alibi has the structural integrity of wet toast.", "Innocent-ish. The jury is checking your search history."],
-    spicy: ["Your story has more plot holes than a bad late-night text and somehow fewer facts.", "Not guilty, but your vibes have requested legal representation and a glass of water."],
-    "extra-spicy": ["Your alibi is a flaming dumpster wearing a fake mustache, and somehow it still thinks it is convincing.", "The court finds you guilty of weaponized nonsense and making everyone read the receipts."]
-  };
-  const fallbackClosers = {
-    spicy: ["The jury is leaning spicy, but it has not yet located your common sense."],
-    "extra-spicy": ["The verdict is feral enough to require a waiver, a helmet, and one deeply concerned chaperone."]
-  };
-  let roastPools = fallbackRoasts;
-  let modeClosers = fallbackClosers;
-  let praises = ["Counterpoint: you may simply be a lovable disaster.", "Good news: your chaos has excellent comedic timing."];
-  let extraSpicyVerdicts = ["The courtroom has been replaced by a tiny circus tent, and you are both the headline act and the evidence."];
-  const evaluatorResults = { boy: ["Good Boy confirmed. The council awards you a gold star and one extremely crunchy treat."], girl: ["Good Girl confirmed. The crown is secure and the vibes are immaculate."] };
-  const questions = ["Have you ever replied ‘lol’ while experiencing no joy?", "Did you say ‘I’m five minutes away’ from a location that was not five minutes away?", "Have you ever hidden a snack from your own future self?", "Do you maintain a backup excuse for your primary excuse?"];
-  const form = document.querySelector("#verdict-form"), verdict = document.querySelector("#verdict"), questionPanel = document.querySelector("#question-panel"), questionText = document.querySelector("#question-text"), verdictButton = document.querySelector("#verdict-button"), swear = document.querySelector("#swear-toggle"), extraSwear = document.querySelector("#extra-swear-toggle"), evaluationResult = document.querySelector("#evaluation-result"), cheaterPanel = document.querySelector("#cheater-panel"), evaluatorPanel = document.querySelector("#evaluator-panel");
-  const recent = [];
-  const pickFresh = (items, excluded = []) => { const list = Array.isArray(items) && items.length ? items : ["No verdict available yet."]; const available = list.filter((item) => !excluded.includes(item)); return (available.length ? available : list)[Math.floor(Math.random() * (available.length ? available.length : list.length))]; };
-  const remember = (text) => { recent.push(text); if (recent.length > 6) recent.shift(); };
-  const focusResult = (node) => { node.focus({ preventScroll: true }); node.scrollIntoView({ block: "nearest" }); };
-  function announce(answer = "") {
-    const mode = form.elements.mode.value, pace = form.elements.pace.value;
-    const parts = [pickFresh(roastPools[mode], recent)];
-    if (swear.checked) parts.push(pickFresh(praises, recent));
-    if (modeClosers[mode]) parts.push(pickFresh(modeClosers[mode], recent));
-    if (mode === "extra-spicy" && extraSwear.checked) parts.push(pickFresh(extraSpicyVerdicts, recent));
-    if (pace === "questions") parts.push(answer === "yes" ? "The witness has confessed to questionable vibes." : "The witness denies everything with suspicious confidence.");
-    const result = parts.join(" "); remember(result); verdict.textContent = result; focusResult(verdict);
-  }
-  function updateMode({ moveFocus = false } = {}) {
-    const questionsMode = form.elements.pace.value === "questions";
-    questionPanel.hidden = !questionsMode; questionPanel.setAttribute("aria-hidden", String(!questionsMode));
-    verdictButton.textContent = questionsMode ? "Evaluate my answer" : "Reveal my verdict";
-    if (questionsMode) questionText.textContent = pickFresh(questions, [questionText.textContent]);
-    if (moveFocus && questionsMode) document.querySelector("#yes-button").focus();
-  }
-  function evaluate() { const title = form.closest("main").querySelector('input[name="good-title"]:checked').value; evaluationResult.textContent = pickFresh(evaluatorResults[title]); focusResult(evaluationResult); }
-  function switchPrimaryMode(event) {
-    const evaluator = event.target.value === "evaluator"; cheaterPanel.hidden = evaluator; evaluatorPanel.hidden = !evaluator;
-    cheaterPanel.setAttribute("aria-hidden", String(evaluator)); evaluatorPanel.setAttribute("aria-hidden", String(!evaluator));
-    const target = evaluator ? evaluatorPanel.querySelector("input") : form.querySelector("input");
-    if (target) target.focus();
-  }
-  form.addEventListener("submit", (event) => { event.preventDefault(); announce( form.elements.pace.value === "questions" ? (form.querySelector('input[name="question-answer"]:checked')?.value || "") : ""); });
-  document.querySelectorAll('input[name="pace"]').forEach((radio) => radio.addEventListener("change", () => updateMode({ moveFocus: true })));
-  const answer = (value) => { let input = form.querySelector('input[name="question-answer"]'); if (!input) { input = document.createElement("input"); input.type = "hidden"; input.name = "question-answer"; form.append(input); } input.value = value; questionText.textContent = pickFresh(questions, [questionText.textContent]); announce(value); };
-  document.querySelector("#yes-button").addEventListener("click", () => answer("yes"));
-  document.querySelector("#no-button").addEventListener("click", () => answer("no"));
-  document.querySelector("#evaluate-button").addEventListener("click", evaluate);
-  swear.addEventListener("change", () => { extraSwear.disabled = !swear.checked; if (!swear.checked) extraSwear.checked = false; });
-  extraSwear.disabled = !swear.checked;
-  document.querySelectorAll('input[name="primary-mode"]').forEach((radio) => radio.addEventListener("change", switchPrimaryMode));
-  updateMode();
-  fetch("roasts.json", { cache: "no-cache" }).then((response) => response.ok ? response.json() : Promise.reject(new Error("roasts unavailable"))).then((data) => {
-    roastPools = { standard: data.standard || fallbackRoasts.standard, spicy: data.spicy || fallbackRoasts.spicy, "extra-spicy": data["extra-spicy"] || fallbackRoasts["extra-spicy"] };
-    modeClosers = { spicy: data.spicyVerdicts || fallbackClosers.spicy, "extra-spicy": data.extraSpicyVerdicts || fallbackClosers["extra-spicy"] };
-    praises = data.praises || praises; extraSpicyVerdicts = data.extraSpicyVerdicts || extraSpicyVerdicts;
-  }).catch(() => { /* Keep the small bundled fallback available offline. */ });
+  const fallback = { standard:["Your alibi has the structural integrity of wet toast.","Innocent-ish. The jury is checking your search history."], spicy:["Your story has more plot holes than a bad late-night text and somehow fewer facts.","The evidence is spicy, the explanation is undercooked, and the group chat is taking notes.","Your alibi entered wearing sunglasses indoors. Not proof, but deeply unhelpful."], "extra-spicy":["Your alibi is a flaming dumpster wearing a fake mustache, and it still thinks it is convincing.","Your red flags formed a union, hired a lawyer, and filed a complaint about your personality.","The vibes are so unhinged that even the lie detector requested hazard pay."] };
+  const questions = ["Have you ever replied ‘lol’ while experiencing no joy?","Did you say ‘I’m five minutes away’ from a location that was not five minutes away?","Have you ever hidden a snack from your own future self?","Do you maintain a backup excuse for your primary excuse?"];
+  let pools = fallback, closers = {spicy:["Verdict: seasoned with side-eye, but still legally inconclusive."],"extra-spicy":["Verdict: feral, absurd, and requiring a helmet for everyone involved."]}, praises=["Counterpoint: you may simply be a lovable disaster.","Good news: your chaos has excellent comedic timing."];
+  const $ = s => document.querySelector(s), form=$("#verdict-form"), verdict=$("#verdict"), questionPanel=$("#question-panel"), questionText=$("#question-text"), button=$("#verdict-button"), swear=$("#swear-toggle"), maxSwear=$("#extra-swear-toggle"), result=$("#evaluation-result"), cheater=$("#cheater-panel"), evaluator=$("#evaluator-panel");
+  const recent=[]; const pick=(a, avoid=[])=>{const list=Array.isArray(a)&&a.length?a:["No verdict available yet."];const ok=list.filter(x=>!avoid.includes(x));return (ok.length?ok:list)[Math.floor(Math.random()*(ok.length?ok.length:list.length))]};
+  const announce = answer => { const mode=form.elements.mode.value, parts=[pick(pools[mode],recent)]; if(swear.checked) parts.push(pick(praises,recent)); if(closers[mode]) parts.push(pick(closers[mode],recent)); if(form.elements.pace.value==='questions') parts.push(answer==='yes'?"The witness has confessed to questionable vibes.":"The witness denies everything with suspicious confidence."); const text=parts.join(' '); recent.push(text); if(recent.length>8)recent.shift(); verdict.textContent=text; verdict.focus(); };
+  const update = focus => { const q=form.elements.pace.value==='questions'; questionPanel.hidden=!q; questionPanel.setAttribute('aria-hidden',String(!q)); button.textContent=q?'Evaluate my answer':'Reveal my verdict'; if(q) questionText.textContent=pick(questions,[questionText.textContent]); if(focus&&q) $("#yes-button").focus(); };
+  const answer = value => { form.elements.questionAnswer.value=value; questionText.textContent=pick(questions,[questionText.textContent]); announce(value); };
+  form.addEventListener('submit',e=>{e.preventDefault(); announce(form.elements.pace.value==='questions'?form.elements.questionAnswer.value:'');});
+  document.querySelectorAll('input[name="pace"]').forEach(x=>x.addEventListener('change',()=>update(true)));
+  $("#yes-button").addEventListener('click',()=>answer('yes')); $("#no-button").addEventListener('click',()=>answer('no'));
+  $("#evaluate-button").addEventListener('click',()=>{const who=form.closest('main').querySelector('input[name="good-title"]:checked')?.value||$("input[name=good-title]:checked").value; result.textContent=who==='boy'?"Good Boy confirmed. Gold star awarded; please enjoy one extremely crunchy treat.":"Good Girl confirmed. The crown is secure and the vibes are immaculate."; result.focus();});
+  document.querySelectorAll('input[name="primary-mode"]').forEach(x=>x.addEventListener('change',e=>{const on=e.target.value==='evaluator';cheater.hidden=on;evaluator.hidden=!on;cheater.setAttribute('aria-hidden',String(on));evaluator.setAttribute('aria-hidden',String(!on));(on?$("#evaluate-button"):form.querySelector('input')).focus();}));
+  swear.addEventListener('change',()=>{maxSwear.disabled=!swear.checked;if(!swear.checked)maxSwear.checked=false}); maxSwear.disabled=!swear.checked; update(false);
+  fetch('roasts.json',{cache:'no-cache'}).then(r=>r.ok?r.json():Promise.reject()).then(d=>{pools={standard:d.standard||fallback.standard,spicy:d.spicy||fallback.spicy,'extra-spicy':d['extra-spicy']||fallback['extra-spicy']};closers={spicy:d.spicyVerdicts||closers.spicy,'extra-spicy':d.extraSpicyVerdicts||closers['extra-spicy']};praises=d.praises||praises}).catch(()=>{});
 })();
