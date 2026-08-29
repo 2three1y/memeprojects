@@ -6,29 +6,18 @@
     "extra-spicy": ["Your alibi is a flaming dumpster wearing a fake mustache, and somehow it still thinks it is convincing.", "The court finds you guilty of weaponized nonsense, catastrophic flirting, and making everyone read the receipts.", "Your red flags formed a union, hired a lawyer, and filed a complaint about your personality.", "This is not an alibi; it is a cry for help typed with both thumbs at 2:17 AM.", "Your excuses are doing parkour across the truth and landing directly in the evidence locker.", "The vibes are so unhinged that even the lie detector requested hazard pay and a different career.", "Your explanation has the energy of a raccoon defusing a bomb with a breadstick: brave, frantic, and absolutely not reassuring.", "You are not beating the allegations; the allegations have built a tiny apartment and started forwarding your mail.", "Your red flags are no longer flags. They are a full marching band with choreography and matching jackets.", "The alibi has collapsed, the witnesses are cackling, and your confidence is now listed as a missing person.", "Somewhere, a perfectly innocent excuse just felt a disturbance in the force and blamed you.", "Your behavior is so suspicious that the question mark filed a restraining order against your punctuation."]
   };
   const praises = ["Counterpoint: you may simply be a lovable disaster.", "Good news: your chaos has excellent comedic timing.", "Your honesty is suspiciously refreshing.", "You are a mess, but at least you are a memorable mess.", "The jury awards you one point for commitment to the bit."];
+  const evaluatorResults = {
+    boy: ["Good Boy confirmed. The council awards you a gold star and one extremely crunchy treat.", "Good Boy energy detected: suspiciously wholesome, mildly chaotic, fully approved.", "You are a Good Boy, but please stop pretending the snack wrapper opened itself."],
+    girl: ["Good Girl confirmed. The crown is secure and the vibes are immaculate.", "Good Girl energy detected: elegant, chaotic, and somehow still on schedule.", "You are a Good Girl. The committee has stamped the form with a glittery YES."]
+  };
   const questions = ["Have you ever replied ‘lol’ while experiencing no joy?", "Did you say ‘I’m five minutes away’ from a location that was not five minutes away?", "Have you ever hidden a snack from your own future self?", "Do you maintain a backup excuse for your primary excuse?"];
-  const form = document.querySelector("#verdict-form"), verdict = document.querySelector("#verdict"), questionPanel = document.querySelector("#question-panel"), questionText = document.querySelector("#question-text"), verdictButton = document.querySelector("#verdict-button"), swear = document.querySelector("#swear-toggle"), extraSwear = document.querySelector("#extra-swear-toggle");
+  const form = document.querySelector("#verdict-form"), verdict = document.querySelector("#verdict"), questionPanel = document.querySelector("#question-panel"), questionText = document.querySelector("#question-text"), verdictButton = document.querySelector("#verdict-button"), swear = document.querySelector("#swear-toggle"), extraSwear = document.querySelector("#extra-swear-toggle"), evaluationResult = document.querySelector("#evaluation-result");
   const recentVerdicts = [];
   const pickFresh = (items, recent) => { const available = items.filter((item) => !recent.includes(item)); return available.length ? available[Math.floor(Math.random() * available.length)] : items[Math.floor(Math.random() * items.length)]; };
   const remember = (text) => { recentVerdicts.push(text); if (recentVerdicts.length > 6) recentVerdicts.shift(); };
   const settings = () => ({ mode: form.elements.mode.value, pace: form.elements.pace.value });
-  function announce(answer = "") {
-    const { mode, pace } = settings();
-    const pool = roastPools[mode] || roastPools.standard;
-    const roast = pickFresh(pool, recentVerdicts);
-    const addPraise = swear.checked || (pace === "questions" && answer === "no");
-    const parts = [roast];
-    if (addPraise) parts.push(pickFresh(praises, recentVerdicts));
-    if (pace === "questions") parts.push(answer === "yes" ? "The witness has confessed to questionable vibes." : "The witness denies everything with suspicious confidence.");
-    if (extraSwear.checked) parts.push("No further questions, your honor.");
-    const result = parts.join(" ");
-    remember(result); verdict.textContent = result; verdict.focus();
-  }
+  function announce(answer = "") { const { mode, pace } = settings(); const pool = roastPools[mode] || roastPools.standard; const roast = pickFresh(pool, recentVerdicts); const addPraise = swear.checked || (pace === "questions" && answer === "no"); const parts = [roast]; if (addPraise) parts.push(pickFresh(praises, recentVerdicts)); if (pace === "questions") parts.push(answer === "yes" ? "The witness has confessed to questionable vibes." : "The witness denies everything with suspicious confidence."); if (extraSwear.checked) parts.push("No further questions, your honor."); const result = parts.join(" "); remember(result); verdict.textContent = result; verdict.focus(); }
   function updateMode() { const questionsMode = form.elements.pace.value === "questions"; questionPanel.hidden = !questionsMode; verdictButton.textContent = questionsMode ? "Skip to verdict" : "Reveal my verdict"; if (questionsMode) questionText.textContent = pickFresh(questions, [questionText.textContent]); }
-  form.addEventListener("submit", (event) => { event.preventDefault(); announce(); });
-  form.elements.pace.forEach((radio) => radio.addEventListener("change", updateMode));
-  document.querySelector("#yes-button").addEventListener("click", () => { questionText.textContent = pickFresh(questions, [questionText.textContent]); announce("yes"); });
-  document.querySelector("#no-button").addEventListener("click", () => { questionText.textContent = pickFresh(questions, [questionText.textContent]); announce("no"); });
-  swear.addEventListener("change", () => { extraSwear.disabled = !swear.checked; if (!swear.checked) extraSwear.checked = false; });
-  extraSwear.disabled = true;
+  function evaluate() { const title = document.querySelector('input[name="good-title"]:checked').value; const result = pickFresh(evaluatorResults[title], [evaluationResult.textContent]); evaluationResult.textContent = result; evaluationResult.focus(); }
+  form.addEventListener("submit", (event) => { event.preventDefault(); announce(); }); form.elements.pace.forEach((radio) => radio.addEventListener("change", updateMode)); document.querySelector("#yes-button").addEventListener("click", () => { questionText.textContent = pickFresh(questions, [questionText.textContent]); announce("yes"); }); document.querySelector("#no-button").addEventListener("click", () => { questionText.textContent = pickFresh(questions, [questionText.textContent]); announce("no"); }); document.querySelector("#evaluate-button").addEventListener("click", evaluate); swear.addEventListener("change", () => { extraSwear.disabled = !swear.checked; if (!swear.checked) extraSwear.checked = false; }); extraSwear.disabled = true;
 })();
