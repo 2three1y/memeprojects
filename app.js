@@ -8,14 +8,27 @@
   const praises = ["Counterpoint: you may simply be a lovable disaster.", "Good news: your chaos has excellent comedic timing.", "Your honesty is suspiciously refreshing.", "You are a mess, but at least you are a memorable mess.", "The jury awards you one point for commitment to the bit."];
   const questions = ["Have you ever replied ‘lol’ while experiencing no joy?", "Did you say ‘I’m five minutes away’ from a location that was not five minutes away?", "Have you ever hidden a snack from your own future self?", "Do you maintain a backup excuse for your primary excuse?"];
   const form = document.querySelector("#verdict-form"), verdict = document.querySelector("#verdict"), questionPanel = document.querySelector("#question-panel"), questionText = document.querySelector("#question-text"), verdictButton = document.querySelector("#verdict-button"), swear = document.querySelector("#swear-toggle"), extraSwear = document.querySelector("#extra-swear-toggle");
-  const pick = (items) => items[Math.floor(Math.random() * items.length)];
+  const recentVerdicts = [];
+  const pickFresh = (items, recent) => { const available = items.filter((item) => !recent.includes(item)); return available.length ? available[Math.floor(Math.random() * available.length)] : items[Math.floor(Math.random() * items.length)]; };
+  const remember = (text) => { recentVerdicts.push(text); if (recentVerdicts.length > 6) recentVerdicts.shift(); };
   const settings = () => ({ mode: form.elements.mode.value, pace: form.elements.pace.value });
-  function announce() { const { mode } = settings(); const pool = roastPools[mode]; const result = pick(pool) + (swear.checked ? " " + pick(praises) : "") + (extraSwear.checked ? " No further questions, your honor." : ""); verdict.textContent = result; verdict.focus(); }
-  function updateMode() { const questionsMode = form.elements.pace.value === "questions"; questionPanel.hidden = !questionsMode; verdictButton.textContent = questionsMode ? "Skip to verdict" : "Reveal my verdict"; if (questionsMode) questionText.textContent = pick(questions); }
+  function announce(answer = "") {
+    const { mode, pace } = settings();
+    const pool = roastPools[mode] || roastPools.standard;
+    const roast = pickFresh(pool, recentVerdicts);
+    const addPraise = swear.checked || (pace === "questions" && answer === "no");
+    const parts = [roast];
+    if (addPraise) parts.push(pickFresh(praises, recentVerdicts));
+    if (pace === "questions") parts.push(answer === "yes" ? "The witness has confessed to questionable vibes." : "The witness denies everything with suspicious confidence.");
+    if (extraSwear.checked) parts.push("No further questions, your honor.");
+    const result = parts.join(" ");
+    remember(result); verdict.textContent = result; verdict.focus();
+  }
+  function updateMode() { const questionsMode = form.elements.pace.value === "questions"; questionPanel.hidden = !questionsMode; verdictButton.textContent = questionsMode ? "Skip to verdict" : "Reveal my verdict"; if (questionsMode) questionText.textContent = pickFresh(questions, [questionText.textContent]); }
   form.addEventListener("submit", (event) => { event.preventDefault(); announce(); });
   form.elements.pace.forEach((radio) => radio.addEventListener("change", updateMode));
-  document.querySelector("#yes-button").addEventListener("click", () => { questionText.textContent = pick(questions); announce(); });
-  document.querySelector("#no-button").addEventListener("click", () => { questionText.textContent = pick(questions); announce(); });
+  document.querySelector("#yes-button").addEventListener("click", () => { questionText.textContent = pickFresh(questions, [questionText.textContent]); announce("yes"); });
+  document.querySelector("#no-button").addEventListener("click", () => { questionText.textContent = pickFresh(questions, [questionText.textContent]); announce("no"); });
   swear.addEventListener("change", () => { extraSwear.disabled = !swear.checked; if (!swear.checked) extraSwear.checked = false; });
   extraSwear.disabled = true;
 })();
