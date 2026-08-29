@@ -1,0 +1,23 @@
+{
+  "regular": [
+    "Your alibi has the structural integrity of wet toast.",
+    "Innocent-ish. The jury is checking your search history.",
+    "You are not a cheater; you are simply suspiciously well-organized."
+  ],
+  "adult": [
+    "Your story has more plot holes than a bad late-night text.",
+    "Not guilty, but your vibes have requested legal representation.",
+    "The evidence is spicy and your explanation is undercooked."
+  ],
+  "adult-plus": [
+    "The verdict is messy, the alibi is feral, and your confidence is doing unpaid overtime.",
+    "Absolutely questionable. Frankly, even your excuses need an excuse.",
+    "Your red flags have formed a committee and elected a chairperson."
+  ],
+  "praises": [
+    "Counterpoint: you may simply be a lovable disaster.",
+    "Good news: your chaos has excellent comedic timing.",
+    "Your honesty is suspiciously refreshing."
+  ],
+  "contributionFormat": "Add short strings to a category array. Keep it playful, consensual, accessible, and free of harassment or identifying real people."
+}

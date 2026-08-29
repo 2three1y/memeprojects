@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="RU a Cheater: a playful, zero-tracking verdict machine.">
+  <title>RU a Cheater?</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <p class="eyebrow">A highly unscientific investigation</p>
+    <h1>RU a Cheater?</h1>
+    <p class="tagline">The verdict is randomized. The suspicion is free.</p>
+  </header>
+  <main id="main-content" class="shell">
+    <form id="verdict-form" novalidate>
+      <fieldset>
+        <legend>Choose your chaos level</legend>
+        <label><input type="radio" name="mode" value="regular" checked> Regular</label>
+        <label><input type="radio" name="mode" value="adult"> Adult</label>
+        <label><input type="radio" name="mode" value="adult-plus"> Adult+</label>
+      </fieldset>
+      <fieldset>
+        <legend>Verdict style</legend>
+        <label><input type="radio" name="pace" value="instant" checked> Instant Verdict</label>
+        <label><input type="radio" name="pace" value="questions"> Question Mode</label>
+      </fieldset>
+      <fieldset>
+        <legend>Language settings</legend>
+        <label class="switch"><input type="checkbox" id="swear-toggle"> <span>Allow spicy language</span></label>
+        <label class="switch"><input type="checkbox" id="extra-swear-toggle"> <span>Unlock extra spicy language</span></label>
+      </fieldset>
+      <section id="question-panel" class="question-panel" hidden aria-labelledby="question-title">
+        <h2 id="question-title">Question Mode</h2>
+        <p id="question-text">Have you ever replied “lol” while experiencing no joy?</p>
+        <div class="question-actions">
+          <button type="button" id="yes-button">Yes, obviously</button>
+          <button type="button" id="no-button" class="secondary">No, I am pure</button>
+        </div>
+      </section>
+      <button type="submit" id="verdict-button" class="primary">Reveal my verdict</button>
+    </form>
+    <section class="result-card" aria-labelledby="result-title">
+      <h2 id="result-title">The official unofficial verdict</h2>
+      <div id="verdict" class="verdict" role="status" aria-live="polite" aria-atomic="true" tabindex="-1">Awaiting evidence...</div>
+      <p class="disclaimer">For entertainment only. This button has no legal standing, relationship expertise, or tiny detective.</p>
+    </section>
+  </main>
+  <footer class="site-footer"><p>Zero tracking. Maximum suspicion.</p></footer>
+</body>
+</html>
