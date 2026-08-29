@@ -1,42 +1,9 @@
 {
-  "standard": [
-    "Your alibi has the structural integrity of wet toast.",
-    "Innocent-ish. The jury is checking your search history.",
-    "You are not a cheater; you are simply suspiciously well-organized.",
-    "Verdict: emotionally buffering.",
-    "Your defense is adorable in the way a raccoon holding a stolen cupcake is adorable.",
-    "The evidence says ‘probably fine,’ which is courtroom language for ‘we need snacks.’",
-    "You have the suspicious aura of someone who says ‘don’t make it weird’ immediately after making it weird."
-  ],
-  "spicy": [
-    "Your story has more plot holes than a bad late-night text and somehow fewer facts.",
-    "Not guilty, but your vibes have requested legal representation and a glass of water.",
-    "The evidence is spicy, the explanation is undercooked, and the group chat is taking notes.",
-    "You are innocent until the group chat votes otherwise, and the group chat has formed a committee.",
-    "Your alibi entered the room wearing sunglasses indoors. That is not proof, but it is deeply unhelpful.",
-    "You did not cheat; you merely conducted an unauthorized field study in bad decisions.",
-    "Your phone has more secrets than a magician with a locked notes app."
-  ],
-  "extra-spicy": [
-    "Your alibi is a flaming dumpster wearing a fake mustache, and somehow it still thinks it is convincing.",
-    "The court finds you guilty of weaponized nonsense, catastrophic flirting, and making everyone read the receipts.",
-    "Your red flags formed a union, hired a lawyer, and filed a complaint about your personality.",
-    "This is not an alibi; it is a cry for help typed with both thumbs at 2:17 AM.",
-    "Your excuses are doing parkour across the truth and landing directly in the evidence locker.",
-    "The vibes are so unhinged that even the lie detector requested hazard pay and a different career.",
-    "Your explanation has the energy of a raccoon defusing a bomb with a breadstick: brave, frantic, and absolutely not reassuring.",
-    "You are not beating the allegations; the allegations have built a tiny apartment and started forwarding your mail.",
-    "Your red flags are no longer flags. They are a full marching band with choreography and matching jackets.",
-    "The alibi has collapsed, the witnesses are cackling, and your confidence is now listed as a missing person.",
-    "Somewhere, a perfectly innocent excuse just felt a disturbance in the force and blamed you.",
-    "Your behavior is so suspicious that the question mark filed a restraining order against your punctuation."
-  ],
-  "praises": [
-    "Counterpoint: you may simply be a lovable disaster.",
-    "Good news: your chaos has excellent comedic timing.",
-    "Your honesty is suspiciously refreshing.",
-    "You are a mess, but at least you are a memorable mess.",
-    "The jury awards you one point for commitment to the bit."
-  ],
-  "contributionFormat": "Add short strings to standard, spicy, or extra-spicy. Keep it playful, consensual, accessible, and free of harassment or identifying real people. Extra Spicy should be intense and absurd, never hateful or targeted."
+  "standard": ["Your alibi has the structural integrity of wet toast.", "Innocent-ish. The jury is checking your search history.", "You are not a cheater; you are simply suspiciously well-organized.", "Verdict: emotionally buffering.", "Your defense is adorable in the way a raccoon holding a stolen cupcake is adorable.", "The evidence says ‘probably fine,’ which is courtroom language for ‘we need snacks.’", "You have the suspicious aura of someone who says ‘don’t make it weird’ immediately after making it weird."],
+  "spicy": ["Your story has more plot holes than a bad late-night text and somehow fewer facts.", "Not guilty, but your vibes have requested legal representation and a glass of water.", "The evidence is spicy, the explanation is undercooked, and the group chat is taking notes.", "You are innocent until the group chat votes otherwise, and the group chat has formed a committee.", "Your alibi entered the room wearing sunglasses indoors. That is not proof, but it is deeply unhelpful.", "You did not cheat; you merely conducted an unauthorized field study in bad decisions.", "Your phone has more secrets than a magician with a locked notes app."],
+  "extra-spicy": ["Your alibi is a flaming dumpster wearing a fake mustache, and somehow it still thinks it is convincing.", "The court finds you guilty of weaponized nonsense, catastrophic flirting, and making everyone read the receipts.", "Your red flags formed a union, hired a lawyer, and filed a complaint about your personality.", "This is not an alibi; it is a cry for help typed with both thumbs at 2:17 AM.", "Your excuses are doing parkour across the truth and landing directly in the evidence locker.", "The vibes are so unhinged that even the lie detector requested hazard pay and a different career.", "Your explanation has the energy of a raccoon defusing a bomb with a breadstick: brave, frantic, and absolutely not reassuring.", "You are not beating the allegations; the allegations have built a tiny apartment and started forwarding your mail.", "Your red flags are no longer flags. They are a full marching band with choreography and matching jackets.", "The alibi has collapsed, the witnesses are cackling, and your confidence is now listed as a missing person.", "Somewhere, a perfectly innocent excuse just felt a disturbance in the force and blamed you.", "Your behavior is so suspicious that the question mark filed a restraining order against your punctuation."],
+  "spicyVerdicts": ["The jury is leaning spicy, but it has not yet located your common sense.", "Your excuse has been seasoned, sautéed, and served with a side of side-eye.", "The receipts are not damning; they are simply screaming for better formatting.", "You brought drama to a quiet room and then acted surprised when it got acoustics."],
+  "extraSpicyVerdicts": ["The courtroom has been replaced by a tiny circus tent, and you are both the headline act and the evidence.", "Your alibi is now an escape room, and every clue is just another screenshot of you making things worse.", "The red flags are chanting your name in harmony while the truth quietly changes its phone number.", "Your defense has achieved liftoff, lost contact with reality, and is currently orbiting the group chat.", "The verdict is feral enough to require a waiver, a helmet, and one deeply concerned chaperone."],
+  "praises": ["Counterpoint: you may simply be a lovable disaster.", "Good news: your chaos has excellent comedic timing.", "Your honesty is suspiciously refreshing.", "You are a mess, but at least you are a memorable mess.", "The jury awards you one point for commitment to the bit."],
+  "contributionFormat": "Add short strings to standard, spicy, extra-spicy, spicyVerdicts, or extraSpicyVerdicts. Keep it playful, consensual, accessible, and free of harassment or identifying real people. Extra Spicy should be intense and absurd, never hateful or targeted."
 }
