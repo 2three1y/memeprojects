@@ -16,7 +16,22 @@
     "Your defense is a hot mess: loud, slippery, and one bad question away from going straight to hell.",
     "That alibi has more holes than a cheap damn umbrella, and your confidence is not saving your ass.",
     "Congratulations: you turned suspicious behavior into a full-time shitshow with benefits.",
-    "The jury finds your explanation guilty of being absolute crap, aggressively rehearsed, and weirdly entertaining."
+    "The jury finds your explanation guilty of being absolute crap, aggressively rehearsed, and weirdly entertaining.",
+    "You're a fucking failure. This is why your chair left you.",
+    "Your WiFi disconnects on purpose just to avoid dealing with your bullshit.",
+    "Even Tomo with a broken abacus does better math than whatever the fuck you just attempted.",
+    "You're a walking red flag wrapped in pure delusion. Get your shit together.",
+    "Your Bluetooth air fryer is having second thoughts about heating your food after seeing this test.",
+    "Your brain opened a support ticket for common sense, then marked it spam. What the hell.",
+    "That excuse is so damn weak even a screensaver could break it.",
+    "You brought clown-shoe logic to a knife fight and still tripped over the bullshit.",
+    "Your decision-making has the survival instincts of a moth in a fireworks warehouse.",
+    "If confidence were competence, you would be unstoppable. Unfortunately, you are just loud as fuck.",
+    "The audacity is impressive; the execution is a catastrophic ass-backwards mess.",
+    "Your plan did not fail upward or downward. It failed sideways into a damn wall.",
+    "Somewhere, a calculator just saw your math and quietly chose retirement.",
+    "You are proof that chaos can wear pants and still forget why it walked into the room.",
+    "Hell called: it wants its worst idea back, and apparently that is you."
   ],
   "evaluator": {
     "standard": {
@@ -26,10 +41,10 @@
       "bad-girl": ["You treat rules like decorative suggestions and make chaos look devastatingly iconic."]
     },
     "extra-spicy": {
-      "good-boy": ["You are wholesome as hell, charming as damn, and somehow still the most suspicious guy in the room."],
-      "good-girl": ["You are polished, powerful, and one raised eyebrow from making this whole damn room panic."],
-      "bad-boy": ["You are a walking red flag with excellent hair, terrible judgment, and the audacity to make that bullshit persuasive."],
-      "bad-girl": ["Your villain era is fully funded; the rules can go to hell and every shred of evidence looks fabulous." ]
+      "good-boy": ["You are wholesome as hell, charming as damn, and somehow still the most suspicious guy in the room.", "You're a fucking failure with excellent manners, which is why even your chair filed for separation."],
+      "good-girl": ["You are polished, powerful, and one raised eyebrow from making this whole damn room panic.", "You're a walking red flag in designer shoes, wrapped in pure delusion and somehow still serving looks."],
+      "bad-boy": ["You are a walking red flag with excellent hair, terrible judgment, and the audacity to make that bullshit persuasive.", "Even Tomo with a broken abacus does better math than whatever the fuck you just attempted, handsome."],
+      "bad-girl": ["Your villain era is fully funded; the rules can go to hell and every shred of evidence looks fabulous.", "Your Bluetooth air fryer wants a restraining order after witnessing that hot-ass mess of a test."]
     }
   }
 }
