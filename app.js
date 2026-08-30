@@ -1,19 +1,73 @@
 (() => {
   "use strict";
-  // Keep the complete response pools in memory: clicks never wait on network I/O.
-  const pools={standard:["Your alibi has the structural integrity of wet toast.","Innocent-ish. The jury is checking your search history.","You are not a cheater; you are simply suspiciously well-organized."],spicy:["Your story has more plot holes than a bad late-night text and somehow fewer facts.","The evidence is spicy, the explanation is undercooked, and the group chat is taking notes.","Your alibi entered wearing sunglasses indoors. Not proof, but deeply unhelpful.","You did not cheat; you conducted an unauthorized field study in terrible decisions.","Your phone has more secrets than a magician with a locked notes app, and less emotional maturity.","The excuse is giving lukewarm confidence with a garnish of panic. Delete the paragraph and start over."],"extra-spicy":["Your alibi is a flaming dumpster wearing a fake mustache, and it still thinks it is convincing.","Your red flags formed a union, hired a lawyer, and filed a complaint about your personality.","This is not an alibi; it is a cry for help typed with both thumbs at 2:17 AM.","Your excuses are doing parkour across the truth and landing directly in the evidence locker.","The vibes are so unhinged that even the lie detector requested hazard pay.","You are not beating the allegations; they built a tiny apartment in your excuses and started forwarding your mail.","Your defense achieved liftoff, lost contact with reality, and is orbiting the group chat.","Your behavior is so suspicious that the question mark filed a restraining order."]};
-  const closers={spicy:["Verdict: seasoned with side-eye, but still legally inconclusive.","The jury finds your excuse guilty of being under-rehearsed and overconfident."],"extra-spicy":["Verdict: feral, absurd, and requiring a helmet for everyone involved.","The jury voted unanimously to confiscate your excuses until further notice."]};
-  const praises=["Counterpoint: you may simply be a lovable disaster.","Good news: your chaos has excellent comedic timing.","Your honesty is suspiciously refreshing."];
-  const evaluator={standard:{"good-boy":["Good Boy confirmed. Gold star awarded; please enjoy one extremely crunchy treat."],"good-girl":["Good Girl confirmed. The crown is secure and the vibes are immaculate."],"bad-boy":["Bad Boy confirmed. The smirk is criminal, the alibi is fictional, and somehow the confidence is working."],"bad-girl":["Bad Girl confirmed. The crown is crooked, the rules are optional, and the entrance was devastatingly iconic."]},spicy:{"good-boy":["Good Boy, but spicy: suspiciously helpful, devastatingly charming, and absolutely accepting that gold star."],"good-girl":["Good Girl, with extra sparkle: polished, powerful, and one raised eyebrow from total domination."],"bad-boy":["Spicy Bad Boy: you flirt with consequences, dodge accountability, and call it a personality."],"bad-girl":["Spicy Bad Girl: the rules saw you coming and quietly resigned. Icon behavior, questionable paperwork."]},"extra-spicy":{"good-boy":["Extra-spicy Good Boy: wholesome enough for a parade, chaotic enough to require adult supervision and a signed waiver."],"good-girl":["Extra-spicy Good Girl: the crown has launched into orbit and your standards are wearing sunglasses at the crime scene."],"bad-boy":["Extra-spicy Bad Boy: a walking red flag with excellent hair, terrible judgment, and the audacity to make it persuasive."],"bad-girl":["Extra-spicy Bad Girl: the villain era is fully funded, the exit is theatrical, and the evidence is fabulous."]}};
-  const questions=["Have you ever replied ‘lol’ while experiencing no joy?","Did you say ‘I’m five minutes away’ from a location that was not five minutes away?","Have you ever hidden a snack from your own future self?","Do you maintain a backup excuse for your primary excuse?"];
-  const $=s=>document.querySelector(s),form=$("#verdict-form"),verdict=$("#verdict"),questionPanel=$("#question-panel"),questionText=$("#question-text"),button=$("#verdict-button"),result=$("#evaluation-result"),cheater=$("#cheater-panel"),evalPanel=$("#evaluator-panel"),recent=[];
-  const pick=(a,avoid=[])=>{const list=a?.length?a:["No verdict available yet."],ok=list.filter(x=>!avoid.includes(x));return(ok.length?ok:list)[Math.floor(Math.random()*(ok.length?ok:list).length)]};
-  const mode=()=>form.elements.mode.value;
-  const announce=answer=>{const m=mode(),used=[pick(pools[m],recent)],text=[...used,(m!=='standard'?pick(closers[m],recent):null),answer?answer==='yes'?"The witness has confessed to questionable vibes.":"The witness denies everything with suspicious confidence.":null].filter(Boolean).join(' ');recent.push(text);if(recent.length>8)recent.shift();verdict.textContent=text;verdict.focus()};
-  const update=focus=>{const q=form.elements.pace.value==='questions';questionPanel.hidden=!q;questionPanel.setAttribute('aria-hidden',String(!q));button.textContent=q?'Evaluate my answer':'Reveal my verdict';if(q)questionText.textContent=pick(questions,[questionText.textContent]);if(focus&&q)$("#yes-button").focus()};
-  const answer=v=>{form.elements.questionAnswer.value=v;announce(v);questionText.textContent=pick(questions,[questionText.textContent])};
-  form.addEventListener('submit',e=>{e.preventDefault();announce(form.elements.pace.value==='questions'?form.elements.questionAnswer.value:'')});document.querySelectorAll('input[name="pace"]').forEach(x=>x.addEventListener('change',()=>update(true)));$("#yes-button").addEventListener('click',()=>answer('yes'));$("#no-button").addEventListener('click',()=>answer('no'));
-  $("#evaluate-button").addEventListener('click',()=>{const who=document.querySelector('input[name="evaluator-title"]:checked')?.value||'good-boy';result.textContent=pick(evaluator[mode()][who]);result.focus()});
-  document.querySelectorAll('input[name="primary-mode"]').forEach(x=>x.addEventListener('change',e=>{const on=e.target.value==='evaluator';cheater.hidden=on;evalPanel.hidden=!on;cheater.setAttribute('aria-hidden',String(on));evalPanel.setAttribute('aria-hidden',String(!on));(on?$("#evaluate-button"):form.querySelector('input')).focus()}));
+
+  const fallbackRoasts = {
+    standard: ["Your alibi has the structural integrity of wet toast.", "Innocent-ish. The jury is checking your search history."],
+    spicy: ["Your story has more plot holes than a bad late-night text and somehow fewer facts.", "Your alibi entered wearing sunglasses indoors. Not proof, but deeply unhelpful."],
+    "extra-spicy": ["Your alibi is a flaming dumpster wearing a fake mustache, and it still thinks it is convincing.", "Your red flags formed a union, hired a lawyer, and filed a complaint about your personality."]
+  };
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const form = $("#verdict-form");
+  const verdict = $("#verdict");
+  const questionPanel = $("#question-panel");
+  const questionText = $("#question-text");
+  const button = $("#verdict-button");
+  const result = $("#evaluation-result");
+  const cheater = $("#cheater-panel");
+  const evalPanel = $("#evaluator-panel");
+  const recent = [];
+  const dataReady = fetch("roasts.json").then(response => {
+    if (!response.ok) throw new Error(`roasts.json returned ${response.status}`);
+    return response.json();
+  }).catch(() => fallbackRoasts);
+
+  const pick = (items, avoid = []) => {
+    const list = Array.isArray(items) && items.length ? items : ["No verdict available yet."];
+    const available = list.filter(item => !avoid.includes(item));
+    return (available.length ? available : list)[Math.floor(Math.random() * (available.length ? available : list).length)];
+  };
+  const chaosLevel = () => $("input[name=mode]:checked", form)?.value || "standard";
+  const announce = async answer => {
+    const data = await dataReady;
+    const mode = chaosLevel();
+    const parts = [pick(data[mode] || fallbackRoasts[mode], recent)];
+    if (mode !== "standard") {
+      const closerKey = mode === "extra-spicy" ? "extraSpicyVerdicts" : "spicyVerdicts";
+      parts.push(pick(data[closerKey], recent));
+    }
+    if (answer) parts.push(answer === "yes" ? "The witness has confessed to questionable vibes." : "The witness denies everything with suspicious confidence.");
+    const text = parts.join(" ");
+    recent.push(text);
+    if (recent.length > 8) recent.shift();
+    verdict.textContent = text;
+    verdict.focus();
+  };
+  const update = focus => {
+    const questions = $("input[name=pace]:checked", form)?.value === "questions";
+    questionPanel.hidden = !questions;
+    questionPanel.setAttribute("aria-hidden", String(!questions));
+    button.textContent = questions ? "Evaluate my answer" : "Reveal my verdict";
+    if (questions) questionText.textContent = pick(["Have you ever replied ‘lol’ while experiencing no joy?", "Did you say ‘I’m five minutes away’ from a location that was not five minutes away?", "Have you ever hidden a snack from your own future self?", "Do you maintain a backup excuse for your primary excuse?"], [questionText.textContent]);
+    if (focus && questions) $("#yes-button").focus();
+  };
+  const answer = value => { form.elements.questionAnswer.value = value; announce(value); };
+  form.addEventListener("submit", event => { event.preventDefault(); announce($("input[name=pace]:checked", form)?.value === "questions" ? form.elements.questionAnswer.value : ""); });
+  document.querySelectorAll('input[name="pace"]').forEach(input => input.addEventListener("change", () => update(true)));
+  $("#yes-button").addEventListener("click", () => answer("yes"));
+  $("#no-button").addEventListener("click", () => answer("no"));
+  $("#evaluate-button").addEventListener("click", async () => {
+    const data = await dataReady;
+    const mode = chaosLevel();
+    const who = $("input[name='evaluator-title']:checked")?.value || "good-boy";
+    const pool = data.evaluator?.[mode]?.[who];
+    result.textContent = pick(pool || data[mode] || fallbackRoasts[mode]);
+    result.focus();
+  });
+  document.querySelectorAll('input[name="primary-mode"]').forEach(input => input.addEventListener("change", event => {
+    const evaluator = event.target.value === "evaluator";
+    cheater.hidden = evaluator; evalPanel.hidden = !evaluator;
+    cheater.setAttribute("aria-hidden", String(evaluator)); evalPanel.setAttribute("aria-hidden", String(!evaluator));
+    (evaluator ? $("#evaluate-button") : form.querySelector("input")).focus();
+  }));
   update(false);
 })();
