@@ -1,80 +1,13 @@
-(() => {
-  "use strict";
-
-  const fallbackRoasts = {
-    standard: ["Your alibi has the structural integrity of wet toast.", "Innocent-ish. The jury is checking your search history."],
-    spicy: ["Your story has more plot holes than a bad late-night text and somehow fewer facts.", "Your alibi entered wearing sunglasses indoors. Not proof, but deeply unhelpful."],
-    "extra-spicy": ["Your alibi is a flaming dumpster wearing a fake mustache, and it still thinks it is convincing.", "Your red flags formed a union, hired a lawyer, and filed a complaint about your personality."]
-  };
-  const fallbackQuestions = ["Have you ever said ‘one more episode’ with the confidence of a known liar?", "Did you ever say ‘no worries’ while manufacturing several new worries?", "Have you ever opened the fridge hoping new content would load?"];
-  const fallbackFollowUps = { yes: ["The witness confirms it: bold, chaotic, and inadmissible in three states."], no: ["The witness denies everything with suspicious confidence."] };
-  const fallbackWitnesses = { yes: ["Witness statement: I saw the confidence. I cannot explain the rest."], no: ["Witness statement: I can confirm the no. I cannot confirm the vibes."] };
-  const $ = (selector, root = document) => root.querySelector(selector);
-  const form = $("#verdict-form");
-  const verdict = $("#verdict");
-  const questionPanel = $("#question-panel");
-  const questionText = $("#question-text");
-  const button = $("#verdict-button");
-  const result = $("#evaluation-result");
-  const cheater = $("#cheater-panel");
-  const evalPanel = $("#evaluator-panel");
-  const liveRegions = [verdict, result].filter(Boolean);
-  const recent = [];
-  liveRegions.forEach(region => { region.setAttribute("aria-live", "polite"); region.setAttribute("aria-atomic", "true"); });
-  questionText?.setAttribute("aria-live", "polite");
-  const dataReady = fetch("roasts.json").then(response => {
-    if (!response.ok) throw new Error(`roasts.json returned ${response.status}`);
-    return response.json();
-  }).catch(() => fallbackRoasts);
-
-  const pick = (items, avoid = []) => {
-    const list = Array.isArray(items) && items.length ? items : ["No verdict available yet."];
-    const available = list.filter(item => !avoid.includes(item));
-    const pool = available.length ? available : list;
-    return pool[Math.floor(Math.random() * pool.length)];
-  };
-  const chaosLevel = () => $("input[name=mode]:checked", form)?.value || "standard";
-  const announce = async answer => {
-    const data = await dataReady;
-    const mode = chaosLevel();
-    const parts = [pick(data[mode] || fallbackRoasts[mode], recent)];
-    if (mode !== "standard") parts.push(pick(data[mode === "extra-spicy" ? "extraSpicyVerdicts" : "spicyVerdicts"], recent));
-    if (answer) {
-      parts.push(pick(data.answerFollowUps?.[answer] || fallbackFollowUps[answer]));
-      parts.push(pick(data.witnessStatements?.[answer] || fallbackWitnesses[answer]));
-    }
-    const text = parts.join(" ");
-    recent.push(text); if (recent.length > 8) recent.shift();
-    verdict.textContent = text;
-    verdict.focus();
-  };
-  const update = focus => {
-    const questions = $("input[name=pace]:checked", form)?.value === "questions";
-    questionPanel.hidden = !questions;
-    questionPanel.setAttribute("aria-hidden", String(!questions));
-    button.textContent = questions ? "Evaluate my answer" : "Reveal my verdict";
-    if (questions) {
-      dataReady.then(data => { questionText.textContent = pick(data.questions || fallbackQuestions, [questionText.textContent]); });
-      if (focus) $("#yes-button")?.focus();
-    }
-  };
-  const answer = value => { form.elements.questionAnswer.value = value; announce(value); };
-  form.addEventListener("submit", event => { event.preventDefault(); announce($("input[name=pace]:checked", form)?.value === "questions" ? form.elements.questionAnswer.value : ""); });
-  document.querySelectorAll('input[name="pace"]').forEach(input => input.addEventListener("change", () => update(true)));
-  $("#yes-button")?.addEventListener("click", () => answer("yes"));
-  $("#no-button")?.addEventListener("click", () => answer("no"));
-  $("#evaluate-button")?.addEventListener("click", async () => {
-    const data = await dataReady;
-    const mode = chaosLevel();
-    const who = $("input[name='evaluator-title']:checked")?.value || "good-boy";
-    result.textContent = pick(data.evaluator?.[mode]?.[who] || data[mode] || fallbackRoasts[mode]);
-    result.focus();
-  });
-  document.querySelectorAll('input[name="primary-mode"]').forEach(input => input.addEventListener("change", event => {
-    const evaluator = event.target.value === "evaluator";
-    cheater.hidden = evaluator; evalPanel.hidden = !evaluator;
-    cheater.setAttribute("aria-hidden", String(evaluator)); evalPanel.setAttribute("aria-hidden", String(!evaluator));
-    (evaluator ? $("#evaluate-button") : form.querySelector("input"))?.focus();
-  }));
-  update(false);
-})();
+(() => {"use strict";
+const $=(s,r=document)=>r.querySelector(s), form=$("#verdict-form"), verdict=$("#verdict"), result=$("#evaluation-result"), panel=$("#question-panel"), q=$("#question-text"), button=$("#verdict-button");
+const names={en:"English",es:"Español",fr:"Français",de:"Deutsch",pt:"Português",it:"Italiano",ja:"日本語",zh:"中文",ko:"한국어",ar:"العربية",hi:"हिन्दी"};
+const ui={en:{language:"Language",choose:"Choose language",mode:"Choose an app mode",help:"Switch between the cheater detector and the persona evaluator.",chaos:"Choose your chaos level",style:"Verdict style",instant:"Instant Verdict",questions:"Question Mode",yes:"Yes, obviously",no:"No, I am pure",reveal:"Reveal my verdict",official:"The official unofficial verdict",awaiting:"Awaiting evidence...",who:"Who are we evaluating?",evaluate:"Evaluate persona",evaluation:"Awaiting evaluation..."},es:{language:"Idioma",choose:"Elegir idioma",mode:"Elige un modo",help:"Cambia entre el detector de infidelidad y el evaluador de personalidad.",chaos:"Elige tu nivel de caos",style:"Estilo del veredicto",instant:"Veredicto instantáneo",questions:"Modo preguntas",yes:"Sí, obviamente",no:"No, soy puro/a",reveal:"Revelar mi veredicto",official:"El veredicto oficial no oficial",awaiting:"Esperando pruebas...",who:"¿A quién evaluamos?",evaluate:"Evaluar personalidad",evaluation:"Esperando evaluación..."},fr:{language:"Langue",choose:"Choisir la langue",mode:"Choisir un mode",help:"Basculez entre le détecteur de tromperie et l’évaluateur de personnalité.",chaos:"Choisissez votre niveau de chaos",style:"Style du verdict",instant:"Verdict instantané",questions:"Mode questions",yes:"Oui, évidemment",no:"Non, je suis pur(e)",reveal:"Révéler mon verdict",official:"Le verdict officiel non officiel",awaiting:"En attente de preuves…",who:"Qui évaluons-nous ?",evaluate:"Évaluer la personnalité",evaluation:"En attente de l’évaluation…"}};
+Object.keys(names).filter(x=>!ui[x]).forEach(x=>ui[x]=ui.en);
+const translations={es:["Tu coartada tiene la solidez de una tostada mojada.","Casi inocente. El jurado revisa tu historial."],fr:["Ton alibi est solide comme une tartine mouillée.","Presque innocent(e). Le jury vérifie ton historique."]};
+const en=["Your alibi has the structural integrity of wet toast.","Innocent-ish. The jury is checking your search history."];let lang="en";
+const field=document.createElement("fieldset");field.id="language-switcher";field.innerHTML='<legend></legend><label for="language-select"></label><select id="language-select"></select>';$("main").prepend(field);const select=$("#language-select");Object.entries(names).forEach(([k,v])=>{const o=document.createElement("option");o.value=k;o.textContent=v;select.append(o)});
+function apply(l,focus){lang=ui[l]?l:"en";document.documentElement.lang=lang;localStorage.setItem("memeprojects-language",lang);const t=ui[lang];field.querySelector("legend").textContent=t.language;field.querySelector("label").textContent=t.choose;$("#primary-mode-switch legend").textContent=t.mode;$("#mode-help").textContent=t.help;$("#verdict-form fieldset legend").textContent=t.chaos;$("#verdict-form fieldset:nth-of-type(2) legend").textContent=t.style;$("#verdict-form label:nth-of-type(4)").lastChild.textContent=t.instant;$("#verdict-form label:nth-of-type(5)").lastChild.textContent=t.questions;$("#yes-button").textContent=t.yes;$("#no-button").textContent=t.no;$("#result-title").textContent=t.official;$("#evaluator-options legend").textContent=t.who;$("#evaluate-button").textContent=t.evaluate;if(!verdict.textContent||verdict.textContent.includes("Awaiting")||verdict.textContent.includes("Esperando"))verdict.textContent=t.awaiting;result.textContent=t.evaluation;select.value=lang;if(focus)select.focus()}
+function announce(a){const list=translations[lang]||en;verdict.textContent=list[Math.floor(Math.random()*list.length)]+(a?(lang==="es"?" El testigo lo confirma.":" The witness confirms it."):"");verdict.focus()}
+function update(){const on=$("input[name=pace]:checked",form)?.value==="questions";panel.hidden=!on;panel.setAttribute("aria-hidden",String(!on));button.textContent=on?ui[lang].questions:ui[lang].reveal}
+select.onchange=()=>apply(select.value,true);form.onsubmit=e=>{e.preventDefault();announce("")};document.querySelectorAll('input[name=pace]').forEach(x=>x.onchange=update);$("#yes-button").onclick=()=>announce("yes");$("#no-button").onclick=()=>announce("no");$("#evaluate-button").onclick=()=>{result.textContent=(translations[lang]||en)[0];result.focus()};
+const detected=(localStorage.getItem("memeprojects-language")||navigator.languages?.[0]||navigator.language||"en").toLowerCase().split("-")[0];apply(names[detected]?detected:"en",false);update();})();
