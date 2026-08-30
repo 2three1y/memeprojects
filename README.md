@@ -29,12 +29,34 @@ MemeProjects is designed for VoiceOver, JAWS, and NVDA with:
 
 The UI uses high-contrast visual styling and a cyberpunk presentation: dark surfaces, bright neon accents, crisp borders, strong focus rings, terminal-inspired typography, and dramatic result cards. Color is supported by text, labels, structure, and status semantics so meaning is never conveyed by color alone.
 
+## Nostr roast subscriptions
+
+`nostr-roast-client.js` is an optional, dependency-free browser helper for subscribing to roast events over WebSocket relays. It supports Kind 20000 lease heartbeats, Kind 1 roast events, explicit revocation, automatic expiry after heartbeats stop, relay fan-out, injected NIP-01 signature verification, and localStorage fallback when relays are unavailable.
+
+Minimal integration:
+
+```html
+<script src="nostr-roast-client.js"></script>
+<script>
+  const client = new NostrRoast({
+    relays: ['wss://relay.damus.io', 'wss://nos.lol'],
+    leaseId: 'my-lease',
+    // Pass nostr-tools verifyEvent (or an equivalent NIP-01 verifier) in production.
+    verifyEvent: window.verifyEvent,
+    onRoast: (roast, cached) => renderRoast(roast.text, { cached }),
+    onStatus: status => console.debug('Nostr roast status:', status)
+  }).connect();
+</script>
+```
+
+Lease events use a `d` tag for the lease identifier and an `exp` tag containing Unix seconds. A `revoke` tag immediately disables the lease. The client ignores malformed, expired, wrong-lease, and (when configured) unverifiable events. Treat relay input as untrusted and sanitize roast text before inserting it into HTML. Call `client.close()` when the view is destroyed.
+
 ## Development and contributing
 
 Open an issue or pull request for focused bug fixes, accessibility improvements, translations, copy edits, and tasteful nonsense. Test with a keyboard, a narrow viewport, zoom, reduced motion, and at least one screen reader. Keep the project client-side, privacy-respecting, kind, and free of surprise data collection.
 
 ## Project files
 
-`index.html` provides semantic structure and the complete language selector. `app.js` owns translation application, dynamic title updates, mode switching, questions, verdicts, and accessible announcements. `style.css` provides the responsive cyberpunk visual system.
+`index.html` provides semantic structure and the complete language selector. `app.js` owns translation application, dynamic title updates, mode switching, questions, verdicts, and accessible announcements. `style.css` provides the responsive cyberpunk visual system. `nostr-roast-client.js` provides the optional Nostr roast subscription layer.
 
 Made with HTML, CSS, JavaScript, and dangerous confidence.
