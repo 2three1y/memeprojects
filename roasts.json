@@ -1,42 +1,35 @@
 {
-  "standard": ["Your alibi has the structural integrity of wet toast.", "Innocent-ish. The jury is checking your search history.", "You are not a cheater; you are simply suspiciously well-organized.", "Your story is technically a story, but the genre is experimental fiction.", "The vibes say ‘probably fine’ in the same way a raccoon says ‘licensed electrician.’"],
-  "spicy": ["Your story has more plot holes than a bad late-night text and somehow fewer facts.", "The evidence is spicy, the explanation is undercooked, and the group chat is taking notes.", "Your alibi entered wearing sunglasses indoors. Not proof, but deeply unhelpful.", "You did not cheat; you conducted an unauthorized field study in terrible decisions.", "Your phone has more secrets than a magician with a locked notes app, and less emotional maturity.", "The excuse is giving lukewarm confidence with a garnish of panic. Delete the paragraph and start over.", "Your timeline is doing interpretive dance and none of the witnesses know the choreography."],
-  "extra-spicy": ["Your alibi is a flaming dumpster wearing a fake mustache, and it still thinks it is convincing.", "Your red flags formed a union, hired a lawyer, and filed a complaint about your personality.", "This is not an alibi; it is a cry for help typed with both thumbs at 2:17 AM.", "Your excuses are doing parkour across the truth and landing directly in the evidence locker.", "The vibes are so unhinged that even the lie detector requested hazard pay.", "You are not beating the allegations; they built a tiny apartment in your excuses and started forwarding your mail.", "Your defense achieved liftoff, lost contact with reality, and is orbiting the group chat.", "Your behavior is so suspicious that the question mark filed a restraining order."],
-  "spicyVerdicts": ["Verdict: seasoned with side-eye, but still legally inconclusive.", "The jury finds your excuse guilty of being under-rehearsed and overconfident.", "You are cleared of cheating and cited for aggravated awkwardness.", "The court orders you to stop saying ‘trust me’ before things get worse."],
-  "extraSpicyVerdicts": ["Verdict: feral, absurd, and requiring a helmet for everyone involved.", "The courtroom is now an escape room and every clue makes your case worse.", "The jury voted unanimously to confiscate your excuses until further notice.", "Your testimony has been remanded to the Department of Extremely Suspicious Behavior."],
-  "questions": [
-    "Have you ever replied ‘lol’ while experiencing absolutely no joy?",
-    "Did you say ‘I’m five minutes away’ from a location that was not five minutes away?",
-    "Have you ever hidden a snack from your own future self and then forgotten the hiding place?",
-    "Do you maintain a backup excuse for your primary excuse?",
-    "Have you ever opened the fridge three times hoping new content would load?",
-    "Have you ever pretended to understand a game whose rules were explained twice?",
-    "Did you ever rehearse a casual conversation and then say something completely different?",
-    "Have you ever sent a risky text, thrown your phone, and called that emotional regulation?",
-    "Have you ever used ‘per my last email’ while spiritually meaning ‘I warned you’?",
-    "Have you ever blamed the algorithm for a decision you made with both hands?",
-    "Have you ever taken a screenshot as evidence and immediately lost the screenshot?",
-    "Did you ever say ‘no worries’ while manufacturing several new worries?",
-    "Have you ever joined a call early just to avoid looking like you joined late?",
-    "Have you ever called something a ‘side quest’ to disguise a deeply avoidable errand?",
-    "Have you ever googled a word, forgotten it, and then googled the same word again?",
-    "Have you ever made eye contact with a dog and considered changing your entire life?",
-    "Did you ever put laundry on a chair and promote it to furniture?",
-    "Have you ever said ‘one more episode’ with the confidence of a known liar?",
-    "Have you ever nodded at a stranger because they nodded first, creating a diplomatic incident?",
-    "Have you ever pretended your microphone was broken when your brain was the broken device?"
+  "standard": [
+    "Your alibi has the structural integrity of wet toast.",
+    "Innocent-ish. The jury is checking your search history.",
+    "You are not a cheater; you are simply suspiciously well-organized.",
+    "Your story is technically a story, but the genre is experimental fiction.",
+    "The vibes say probably fine in the same way a raccoon says licensed electrician."
   ],
-  "answerFollowUps": {
-    "yes": ["The witness confirms it: bold, chaotic, and inadmissible in three states.", "Interesting. The truth has entered the room wearing tiny sunglasses.", "A yes! Your honesty is admirable; your decision-making is being reviewed.", "The witness nods so hard the courtroom furniture moved.", "Confession logged. The group chat has already made a slideshow."],
-    "no": ["The witness denies everything with suspicious confidence.", "No? Fascinating. The silence has hired a lawyer.", "The witness says no, but the eyebrows filed a separate report.", "A firm no, delivered with the energy of someone hiding a second no.", "Denied. The jury will now inspect the vibes under better lighting."]
-  },
-  "witnessStatements": {
-    "yes": ["Witness statement: I saw the confidence. I cannot explain the rest.", "Witness statement: They said yes before the question finished buffering.", "Witness statement: Frankly, the honesty was the most suspicious part.", "Witness statement: I was promised immunity and a breadstick.", "Witness statement: The answer was yes, but the alibi was wearing tap shoes."],
-    "no": ["Witness statement: They said no with the precision of a professionally trained penguin.", "Witness statement: I saw nothing, heard nothing, and would like to keep my snacks.", "Witness statement: The denial was technically compelling and spiritually confusing.", "Witness statement: Their story checks out, except for the part where it exists.", "Witness statement: I can confirm the no. I cannot confirm the vibes."]
-  },
+  "extra-spicy": [
+    "What the actual hell? Your alibi is a flaming dumpster and it still thinks it is convincing.",
+    "You absolute ass-clown: the evidence is screaming and your excuse is doing parkour over the truth.",
+    "This story is bullshit with a garnish of panic, and even the lie detector wants hazard pay.",
+    "Your red flags formed a union, hired a lawyer, and filed a damn complaint about your personality.",
+    "WTF happened to your timeline? It is drunk, contradictory, and somehow still overconfident.",
+    "You are not beating the allegations; they built a tiny apartment in your excuses and started forwarding your mail.",
+    "Your defense is a hot mess: loud, slippery, and one bad question away from going straight to hell.",
+    "That alibi has more holes than a cheap damn umbrella, and your confidence is not saving your ass.",
+    "Congratulations: you turned suspicious behavior into a full-time shitshow with benefits.",
+    "The jury finds your explanation guilty of being absolute crap, aggressively rehearsed, and weirdly entertaining."
+  ],
   "evaluator": {
-    "standard": {"good-boy": ["You are a suspiciously wholesome overachiever whose gold star is probably forged."], "good-girl": ["You turned competence into a personality and somehow made it look adorable."], "bad-boy": ["Your smirk is criminal, your alibi is fictional, and somehow the confidence is working."], "bad-girl": ["You treat rules like decorative suggestions and make chaos look devastatingly iconic."]},
-    "spicy": {"good-boy": ["You are suspiciously helpful, devastatingly charming, and absolutely accepting that gold star."], "good-girl": ["You are polished, powerful, and one raised eyebrow from total domination."], "bad-boy": ["You flirt with consequences, dodge accountability, and call it a personality."], "bad-girl": ["The rules saw you coming and quietly resigned; your paperwork remains deeply questionable."]},
-    "extra-spicy": {"good-boy": ["You are wholesome enough for a parade, chaotic enough to require adult supervision, and already signing the waiver."], "good-girl": ["Your crown launched into orbit, your standards wear sunglasses, and the crime scene is taking notes."], "bad-boy": ["You are a walking red flag with excellent hair, terrible judgment, and the audacity to make it persuasive."], "bad-girl": ["Your villain era is fully funded, your exit is theatrical, and every shred of evidence is fabulous."]}
+    "standard": {
+      "good-boy": ["You are a suspiciously wholesome overachiever whose gold star is probably forged."],
+      "good-girl": ["You turned competence into a personality and somehow made it look adorable."],
+      "bad-boy": ["Your smirk is criminal, your alibi is fictional, and somehow the confidence is working."],
+      "bad-girl": ["You treat rules like decorative suggestions and make chaos look devastatingly iconic."]
+    },
+    "extra-spicy": {
+      "good-boy": ["You are wholesome as hell, charming as damn, and somehow still the most suspicious guy in the room."],
+      "good-girl": ["You are polished, powerful, and one raised eyebrow from making this whole damn room panic."],
+      "bad-boy": ["You are a walking red flag with excellent hair, terrible judgment, and the audacity to make that bullshit persuasive."],
+      "bad-girl": ["Your villain era is fully funded; the rules can go to hell and every shred of evidence looks fabulous." ]
+    }
   }
 }
