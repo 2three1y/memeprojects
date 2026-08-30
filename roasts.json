@@ -6,23 +6,8 @@
   "extraSpicyVerdicts": ["Verdict: feral, absurd, and requiring a helmet for everyone involved.", "The courtroom is now an escape room and every clue makes your case worse.", "The jury voted unanimously to confiscate your excuses until further notice."],
   "praises": ["Counterpoint: you may simply be a lovable disaster.", "Good news: your chaos has excellent comedic timing.", "Your honesty is suspiciously refreshing."],
   "evaluator": {
-    "standard": {
-      "good-boy": ["Good Boy confirmed. Gold star awarded; please enjoy one extremely crunchy treat."],
-      "good-girl": ["Good Girl confirmed. The crown is secure and the vibes are immaculate."],
-      "bad-boy": ["Bad Boy confirmed. The smirk is criminal, the alibi is fictional, and somehow the confidence is working."],
-      "bad-girl": ["Bad Girl confirmed. The crown is crooked, the rules are optional, and the entrance was devastatingly iconic."]
-    },
-    "spicy": {
-      "good-boy": ["Good Boy, but spicy: suspiciously helpful, devastatingly charming, and absolutely accepting that gold star."],
-      "good-girl": ["Good Girl, with extra sparkle: polished, powerful, and one raised eyebrow from total domination."],
-      "bad-boy": ["Spicy Bad Boy: you flirt with consequences, dodge accountability, and call it a personality. The jury is blushing.", "Spicy Bad Boy: all swagger, zero receipts, and somehow still trying to make red flags look like a lifestyle."] ,
-      "bad-girl": ["Spicy Bad Girl: the rules saw you coming and quietly resigned. Icon behavior, questionable paperwork.", "Spicy Bad Girl: you weaponized the smirk, outsourced the remorse, and left the group chat speechless."]
-    },
-    "extra-spicy": {
-      "good-boy": ["Extra-spicy Good Boy: wholesome enough for a parade, chaotic enough to require adult supervision and a signed waiver."],
-      "good-girl": ["Extra-spicy Good Girl: the crown has launched into orbit and your standards are wearing sunglasses at the crime scene."],
-      "bad-boy": ["Extra-spicy Bad Boy: a walking red flag with excellent hair, terrible judgment, and the audacity to make it persuasive.", "Extra-spicy Bad Boy: your charm is a get-out-of-consequences card you keep trying to play after the deck caught fire."],
-      "bad-girl": ["Extra-spicy Bad Girl: the villain era is fully funded, the exit is theatrical, and the evidence is fabulous.", "Extra-spicy Bad Girl: you did not break the rules; you made them watch while you stole the spotlight and their dignity."]
-    }
+    "standard": {"good-boy": ["Good Boy confirmed. Gold star awarded; please enjoy one extremely crunchy treat."], "good-girl": ["Good Girl confirmed. The crown is secure and the vibes are immaculate."], "bad-boy": ["Bad Boy confirmed. The smirk is criminal, the alibi is fictional, and somehow the confidence is working."], "bad-girl": ["Bad Girl confirmed. The crown is crooked, the rules are optional, and the entrance was devastatingly iconic."]},
+    "spicy": {"good-boy": ["Good Boy, but spicy: suspiciously helpful, devastatingly charming, and absolutely accepting that gold star."], "good-girl": ["Good Girl, with extra sparkle: polished, powerful, and one raised eyebrow from total domination."], "bad-boy": ["Spicy Bad Boy: you flirt with consequences, dodge accountability, and call it a personality."], "bad-girl": ["Spicy Bad Girl: the rules saw you coming and quietly resigned. Icon behavior, questionable paperwork."]},
+    "extra-spicy": {"good-boy": ["Extra-spicy Good Boy: wholesome enough for a parade, chaotic enough to require adult supervision and a signed waiver."], "good-girl": ["Extra-spicy Good Girl: the crown has launched into orbit and your standards are wearing sunglasses at the crime scene."], "bad-boy": ["Extra-spicy Bad Boy: a walking red flag with excellent hair, terrible judgment, and the audacity to make it persuasive."], "bad-girl": ["Extra-spicy Bad Girl: the villain era is fully funded, the exit is theatrical, and the evidence is fabulous."]}
   }
 }
