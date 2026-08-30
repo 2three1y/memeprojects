@@ -1,8 +1,28 @@
 {
-  "standard": ["Your alibi has the structural integrity of wet toast.","Innocent-ish. The jury is checking your search history.","You are not a cheater; you are simply suspiciously well-organized.","Verdict: emotionally buffering.","Your defense is adorable in the way a raccoon holding a cupcake is adorable.","The evidence says probably fine, which is courtroom language for we need snacks.","You made a simple story wear a fake mustache and called it an alibi.","Your suspicious aura is mostly just excellent comedic timing."],
-  "spicy": ["Your story has more plot holes than a bad late-night text and somehow fewer facts.","The evidence is spicy, the explanation is undercooked, and the group chat is taking notes.","Your alibi entered wearing sunglasses indoors. Not proof, but deeply unhelpful.","You did not cheat; you conducted an unauthorized field study in bad decisions.","Your phone has more secrets than a magician with a locked notes app.","The excuse is giving lukewarm confidence with a garnish of panic.","Your red flags are small, tasteful, and somehow still visible from orbit.","You brought drama to a quiet room and then blamed the acoustics.","The receipts are not damning; they are simply asking for better formatting.","Your defense has been seasoned with side-eye and served without supporting evidence."],
-  "extra-spicy": ["Your alibi is a flaming dumpster wearing a fake mustache, and it still thinks it is convincing.","Your red flags formed a union, hired a lawyer, and filed a complaint about your personality.","This is not an alibi; it is a cry for help typed with both thumbs at 2:17 AM.","Your excuses are doing parkour across the truth and landing in the evidence locker.","The vibes are so unhinged that even the lie detector requested hazard pay.","Your explanation has the energy of a raccoon defusing a bomb with a breadstick.","You are not beating the allegations; they built a tiny apartment and started forwarding your mail.","Your red flags are now a full marching band with choreography and matching jackets.","The alibi collapsed, the witnesses are cackling, and your confidence is missing.","Somewhere, a perfectly innocent excuse just felt a disturbance in the force and blamed you.","Your behavior is so suspicious that the question mark filed a restraining order.","Your defense achieved liftoff, lost contact with reality, and is orbiting the group chat."],
-  "spicyVerdicts": ["Verdict: seasoned with side-eye, but still legally inconclusive.","The jury finds your excuse guilty of being under-rehearsed and overconfident.","You are cleared of cheating and cited for aggravated awkwardness.","The courtroom has requested receipts, snacks, and one responsible adult."],
-  "extraSpicyVerdicts": ["Verdict: feral, absurd, and requiring a helmet for everyone involved.","The courtroom is now an escape room and every clue makes your case worse.","Your defense has been sentenced to community service at the truth factory.","The jury voted unanimously to confiscate your excuses until further notice."],
-  "praises": ["Counterpoint: you may simply be a lovable disaster.","Good news: your chaos has excellent comedic timing.","Your honesty is suspiciously refreshing.","You are a mess, but at least you are a memorable mess."]
+  "standard": ["Your alibi has the structural integrity of wet toast.", "Innocent-ish. The jury is checking your search history.", "You are not a cheater; you are simply suspiciously well-organized."],
+  "spicy": ["Your story has more plot holes than a bad late-night text and somehow fewer facts.", "The evidence is spicy, the explanation is undercooked, and the group chat is taking notes.", "Your alibi entered wearing sunglasses indoors. Not proof, but deeply unhelpful."],
+  "extra-spicy": ["Your alibi is a flaming dumpster wearing a fake mustache, and it still thinks it is convincing.", "Your red flags formed a union, hired a lawyer, and filed a complaint about your personality.", "The vibes are so unhinged that even the lie detector requested hazard pay."],
+  "spicyVerdicts": ["Verdict: seasoned with side-eye, but still legally inconclusive.", "The jury finds your excuse guilty of being under-rehearsed and overconfident."],
+  "extraSpicyVerdicts": ["Verdict: feral, absurd, and requiring a helmet for everyone involved.", "The courtroom is now an escape room and every clue makes your case worse."],
+  "praises": ["Counterpoint: you may simply be a lovable disaster.", "Good news: your chaos has excellent comedic timing.", "Your honesty is suspiciously refreshing."],
+  "evaluator": {
+    "standard": {
+      "good-boy": ["Good Boy confirmed. Gold star awarded; please enjoy one extremely crunchy treat."],
+      "good-girl": ["Good Girl confirmed. The crown is secure and the vibes are immaculate."],
+      "bad-boy": ["Bad Boy confirmed. The smirk is criminal, the alibi is fictional, and somehow the confidence is working."],
+      "bad-girl": ["Bad Girl confirmed. The crown is crooked, the rules are optional, and the entrance was devastatingly iconic."]
+    },
+    "spicy": {
+      "good-boy": ["Good Boy, but spicy: suspiciously helpful, devastatingly charming, and absolutely accepting that gold star."],
+      "good-girl": ["Good Girl, with extra sparkle: polished, powerful, and one raised eyebrow from total domination."],
+      "bad-boy": ["Spicy Bad Boy: you flirt with consequences and call it a personality. The jury is blushing."],
+      "bad-girl": ["Spicy Bad Girl: the rules saw you coming and quietly resigned. Icon behavior, questionable paperwork."]
+    },
+    "extra-spicy": {
+      "good-boy": ["Extra-spicy Good Boy: wholesome enough for a parade, chaotic enough to require adult supervision."],
+      "good-girl": ["Extra-spicy Good Girl: the crown has launched into orbit and your standards are wearing sunglasses."],
+      "bad-boy": ["Extra-spicy Bad Boy: a walking red flag with excellent hair and the audacity to make it persuasive."],
+      "bad-girl": ["Extra-spicy Bad Girl: the villain era is fully funded, the exit is theatrical, and the evidence is fabulous."]
+    }
+  }
 }
