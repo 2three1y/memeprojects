@@ -1,78 +1,40 @@
 # MemeProjects
 
-Welcome to MemeProjects: the hub for cursed, charming, zero-tracking web experiments that should probably have been a group chat message.
+MemeProjects is a zero-tracking, browser-first collection of playful experiments. The flagship experience, RU a Cheater & Persona Evaluator, turns suspicious questions and personality judgments into deliberately unscientific, theatrical fun. Results are satire, not evidence, counseling, or surveillance.
 
-We make tiny sites with big opinions, questionable premises, and absolutely no interest in following you around the internet. The flagship exhibit is **RU a Cheater**, a playful browser experience that investigates your romantic alibis with the scientific rigor of a friend squinting at your text messages.
+## RU a Cheater & Persona Evaluator
 
-## The vibe
+The app has two switchable modes: RU a Cheater for instant verdicts or question-based interrogation, and Persona Evaluator for playful Good Boy, Good Girl, Bad Boy, and Bad Girl evaluations. Shared chaos levels (Standard, Spicy, and Extra Spicy) control the tone. Every interaction runs client-side and avoids accounts, analytics, ad pixels, fingerprinting, and hidden tracking.
 
-MemeProjects is a playground for experiments that are:
+## Internationalization architecture
 
-- Fun first, but not careless.
-- Weird enough to earn a second look.
-- Small, fast, and easy to understand.
-- Zero-tracking by design: no analytics, ad pixels, fingerprinting, or secret dossier.
-- Built to run in the browser without demanding an account or a blood oath.
+The interface supports 80+ language choices through the language selector. Translatable content is marked with data-i18n keys and applied dynamically to the DOM whenever the language changes. Runtime-generated content—including questions, verdicts, evaluation results, mode-switch announcements, button labels, and status text—comes from the active translation pack rather than hardcoded English.
 
-## Featured project: RU a Cheater
+The active translation also updates document.documentElement.lang, the language selector's accessible label, and document.title. Titles are localized on every language switch and remain synchronized with the selected mode when mode-specific titles are used. ARIA live-region announcements are emitted in the active language, so switching modes does not leak English into a translated experience.
 
-RU a Cheater is a tongue-in-cheek verdict machine for the eternally suspicious and the enthusiastically innocent. It is satire, not surveillance, relationship counseling, or admissible evidence. If the result says you are guilty, please remember that a JavaScript button has no legal standing.
+## Accessibility and screen readers
 
-### Modes
+MemeProjects is designed for VoiceOver, JAWS, and NVDA with:
 
-- **Quick Verdict** — Get the fast, dramatic ruling with minimal ceremony.
-- **Interrogation** — Answer a longer set of ridiculous questions and let the suspicion engine overthink everything.
-- **Chaos Mode** — Embrace maximum randomness, theatrical accusations, and the possibility that your phone charger is somehow involved.
-- **Truth-or-Roast** — Receive a playful roast alongside the verdict. The roast is aimed at the situation, not at anyone's identity or worth.
+- Semantic header, main, footer, nav, form, section, fieldset, and legend landmarks.
+- A skip link to the main content.
+- Explicit labels, descriptions, headings, and control relationships.
+- Keyboard-operable radio groups, buttons, and language switching.
+- ARIA-hidden state synchronized with panel visibility.
+- Polite, atomic ARIA-live status regions for verdicts, evaluations, and mode changes.
+- Focus returned to the newly updated result when appropriate.
+- Visible focus styling, responsive layouts, zoom-friendly sizing, and reduced-motion support.
 
-Mode names and behavior may evolve as the experiment grows. The only constant is that the stakes are imaginary and the delivery is unnecessarily confident.
+## Visual design
 
-## Privacy
+The UI uses high-contrast visual styling and a cyberpunk presentation: dark surfaces, bright neon accents, crisp borders, strong focus rings, terminal-inspired typography, and dramatic result cards. Color is supported by text, labels, structure, and status semantics so meaning is never conveyed by color alone.
 
-The projects in this hub aim to work entirely client-side. We do not intentionally collect personal data, sell attention, or install a tiny detective in your browser. Check each project's local documentation for its exact behavior, and do not enter sensitive information into any web experiment, even one wearing a funny hat.
+## Development and contributing
 
-## Accessibility notes
+Open an issue or pull request for focused bug fixes, accessibility improvements, translations, copy edits, and tasteful nonsense. Test with a keyboard, a narrow viewport, zoom, reduced motion, and at least one screen reader. Keep the project client-side, privacy-respecting, kind, and free of surprise data collection.
 
-Accessibility is part of the joke and part of the job. Contributions should strive to include:
+## Project files
 
-- Semantic HTML and a logical heading structure.
-- Keyboard access for every interactive control.
-- Visible, high-contrast focus states.
-- Labels and instructions that work with screen readers.
-- Status and verdict updates announced appropriately without trapping focus.
-- Reduced-motion support using `prefers-reduced-motion`.
-- Responsive layouts that remain usable with zoom and on small screens.
-- Humor that does not depend only on color, animation, sound, or slang.
+`index.html` provides semantic structure and the complete language selector. `app.js` owns translation application, dynamic title updates, mode switching, questions, verdicts, and accessible announcements. `style.css` provides the responsive cyberpunk visual system.
 
-If an interaction is hilarious but impossible to operate, it is not finished. It is merely heckling the user.
-
-## Project structure
-
-A typical experiment keeps its chaos legible:
-
-```text
-index.html    entry point and semantic structure
-styles/       CSS and responsive presentation
-script/       client-side behavior
-roasts/       reusable jokes, verdicts, and copy
-README.md     what this thing is and why it exists
-```
-
-## Contributing
-
-Ideas, bug reports, accessibility fixes, copy edits, and tasteful nonsense are welcome.
-
-1. Open an issue describing the experiment, improvement, or bug.
-2. Keep changes focused and explain the user-facing effect.
-3. Test with a keyboard, a narrow viewport, and reduced motion enabled.
-4. Do not add tracking, ad-tech, unnecessary dependencies, or surprise data collection.
-5. Keep jokes playful, avoid punching down, and do not turn real people into targets.
-6. Open a pull request with a clear summary and testing notes.
-
-A contribution does not need to be polished comedy on day one. It does need to be kind, accessible, and less cursed than the code it replaces.
-
-## License
-
-Unless a project says otherwise, treat the contents as an invitation to learn from, remix, and improve the experiments. Preserve attribution and check the individual project notes before shipping a remix.
-
-Made with HTML, CSS, JavaScript, and the dangerous confidence of someone who just discovered `Math.random()`.
+Made with HTML, CSS, JavaScript, and dangerous confidence.
