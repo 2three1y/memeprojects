@@ -1,1 +1,66 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Accessible MemeAPI documentation and security guidance"><title>MemeAPI — Documentation</title><link rel="stylesheet" href="./style.css"></head><body><a class="skip-link" href="#main-content">Skip to main content</a><header class="site-header"><p class="eyebrow">MemeProjects · MemeAPI</p><h1>MemeAPI documentation</h1><p class="tagline">Secure, rate-limited funny content for your apps.</p></header><main id="main-content" class="shell"><section class="result-card" aria-labelledby="quickstart"><h2 id="quickstart">Quick start</h2><p>Send a GET request with an API key in the <code>X-API-Key</code> header.</p><pre><code>curl -H 'X-API-Key: mk_your_key' /api/v1/roast</code></pre></section><section class="result-card" aria-labelledby="security"><h2 id="security">Security protections</h2><ul><li>API-key authentication; keys are never returned or logged.</li><li>Per-IP rate limiting and small JSON body limits.</li><li>Helmet headers, CSP, no-store caching, strict CORS, and safe text sanitization.</li><li>GET-only content endpoints reduce CSRF exposure; do not place keys in URLs.</li></ul></section><section class="result-card" aria-labelledby="accessibility"><h2 id="accessibility">Accessibility</h2><p>This documentation uses semantic landmarks, a skip link, labelled sections, visible keyboard focus, readable contrast, and responsive text. No focus trap is used because this page has no modal interaction.</p></section></main><footer class="site-footer"><p><a href="./index.html">Back to MemeProjects</a></p></footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="MemeAPI documentation: secure, accessible funny content for developers.">
+  <title>MemeAPI — Lock the Keys, Keep the Laughs</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header" role="banner">
+    <p class="eyebrow">MemeProjects · Developer documentation</p>
+    <h1>MemeAPI: Lock the Keys, Keep the Laughs</h1>
+    <p class="tagline">A small, serious API for content that knows the difference between a roast and a security incident.</p>
+    <p class="disclaimer-notice" role="note">The jokes are intentional. The exposed credentials are not.</p>
+  </header>
+  <main id="main-content" class="shell" role="main">
+    <div id="page-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true">MemeAPI documentation loaded.</div>
+    <nav aria-label="Documentation sections" class="result-card">
+      <h2>On this page</h2>
+      <ul>
+        <li><a href="#quickstart">Quick start</a></li>
+        <li><a href="#endpoints">Endpoints</a></li>
+        <li><a href="#security">Security model</a></li>
+        <li><a href="#accessibility">Accessibility promise</a></li>
+      </ul>
+    </nav>
+    <section id="quickstart" class="result-card" aria-labelledby="quickstart-heading">
+      <h2 id="quickstart-heading">Quick start</h2>
+      <p>Keep your key in a secret manager or server-side environment variable. Send it in the <code>X-API-Key</code> header; never put it in a URL, screenshot, or commit.</p>
+      <pre aria-label="Example curl request"><code>curl -H 'X-API-Key: mk_your_key' \
+  https://your-host.example/api/v1/roast</code></pre>
+      <p role="note">If your key appears in a log, rotate it. The log is not a vault; it is merely a diary with worse access control.</p>
+    </section>
+    <section id="endpoints" class="result-card" aria-labelledby="endpoints-heading">
+      <h2 id="endpoints-heading">Endpoints</h2>
+      <h3><code>GET /api/health</code></h3>
+      <p>Unauthenticated service health check. Returns a minimal status response.</p>
+      <h3><code>GET /api/v1/roast</code></h3>
+      <p>Requires an API key. Optional <code>mode</code> values are <code>standard</code> and <code>extra-spicy</code>. Responses are drawn from the existing local roast collection.</p>
+      <h3><code>GET /api/v1/docs</code></h3>
+      <p>This documentation page, designed to be readable by people and forgiving to keyboards.</p>
+    </section>
+    <section id="security" class="result-card" aria-labelledby="security-heading">
+      <h2 id="security-heading">Security model</h2>
+      <ul>
+        <li>API-key authentication accepts headers only and hashes the request identity for diagnostics.</li>
+        <li>Rate limiting slows automated abuse, including bots that mistake every endpoint for an all-you-can-eat buffet.</li>
+        <li>Helmet headers, strict CSP, no-store caching, strict CORS, bounded JSON bodies, and safe text sanitization are enabled.</li>
+        <li>Read-only content endpoints reduce CSRF exposure. If write endpoints are added later, use explicit CSRF protection and same-origin validation.</li>
+        <li>Errors stay deliberately generic so attackers get less useful detail than legitimate operators.</li>
+      </ul>
+    </section>
+    <section id="accessibility" class="result-card" aria-labelledby="accessibility-heading">
+      <h2 id="accessibility-heading">Accessibility promise</h2>
+      <p>This page uses header, nav, main, section, and footer landmarks; a skip link; labelled headings; descriptive code examples; keyboard-operable links; visible focus styles inherited from the site; responsive sizing; and an atomic polite live region for page status.</p>
+      <p>No modal or custom focus trap is introduced here, so focus follows normal browser navigation and VoiceOver users can move through the document predictably.</p>
+    </section>
+  </main>
+  <footer class="site-footer" role="contentinfo">
+    <p><a href="./index.html">Back to MemeProjects</a></p>
+    <p>Build the laugh. Protect the interface.</p>
+  </footer>
+</body>
+</html>
